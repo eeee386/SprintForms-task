@@ -1,0 +1,8 @@
+.numberWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.numberWrapper > span {
+  margin: 3px 0 0 10px;
+}
