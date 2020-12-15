@@ -23,12 +23,12 @@ export const FizzBuzz = () => {
     return (
         <div>
             <div>
-                <input id={"threeInput"} onChange={(e)=> setThreeInput(e.target.value)} />
-                <button id={"threeButton"} onClick={(e)=> setThree(threeInput)}>Set Three</button>
+                <input data-testid={"threeInput"} id={"threeInput"} onChange={(e)=> setThreeInput(e.target.value)} />
+                <button data-testid={"threeButton"} id={"threeButton"} onClick={(e)=> setThree(threeInput)}>Set Three</button>
             </div>
             <div>
-                <input id={"fiveInput"} onChange={(e)=> setFiveInput(e.target.value)} />
-                <button id={"fiveButton"} onClick={(e)=> setFive(fiveInput)}>Set Five</button>
+                <input data-testid={"fiveInput"} id={"fiveInput"} onChange={(e)=> setFiveInput(e.target.value)} />
+                <button data-testid={"fiveButton"} id={"fiveButton"} onClick={(e)=> setFive(fiveInput)}>Set Five</button>
             </div>
             <div className={"numberWrapper"}>
                 {onetoHundred.map(e => <span data-testid={e.toString()} id={e.toString()}>{writeFizzBuzz(e)}</span>)}
