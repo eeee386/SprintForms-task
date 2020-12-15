@@ -8,6 +8,7 @@ export const FizzBuzz = () => {
     const [five, setFive] = useState("Buzz");
     const [threeInput, setThreeInput] = useState("");
     const [fiveInput, setFiveInput] = useState("");
+
     const writeFizzBuzz = (e: number): string => {
         if(e%3===0 && e%5===0){
             return three+five;
