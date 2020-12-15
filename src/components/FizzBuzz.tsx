@@ -6,18 +6,32 @@ onetoHundred.shift();
 export const FizzBuzz = () => {
     const [three, setThree] = useState("Fizz");
     const [five, setFive] = useState("Buzz");
+    const [threeInput, setThreeInput] = useState("");
+    const [fiveInput, setFiveInput] = useState("");
     const writeFizzBuzz = (e: number): string => {
-        let s = "";
-        if(e % 3 === 0){
-            s += three;
+        if(e%3===0 && e%5===0){
+            return three+five;
+        } else if(e%3 === 0){
+            return three;
+        } else if (e%5===0){
+            return five;
+        } else {
+            return e.toString();
         }
-        if(e %5 === 0){
-            s += five;
-        }
-        return s || e.toString();
     }
 
-    return <div className={"numberWrapper"}>
-        {onetoHundred.map(e => <span>{writeFizzBuzz(e)}</span>)}
-    </div>;
+    return (
+        <div>
+            <div>
+                <input onChange={(e)=> setThreeInput(e.target.value)} />
+                <button onClick={(e)=> setThree(threeInput)}>Set Three</button>
+            </div>
+            <div>
+                <input onChange={(e)=> setFiveInput(e.target.value)} />
+                <button onClick={(e)=> setFive(fiveInput)}>Set Five</button>
+            </div>
+            <div className={"numberWrapper"}>
+                {onetoHundred.map(e => <span>{writeFizzBuzz(e)}</span>)}
+            </div>
+        </div>);
 }
