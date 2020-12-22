@@ -54,6 +54,7 @@ describe("Test FizzBuzz Component", ()=> {
         });
         describe("Check interactions", () => {
             test('inputs should change the text', () => {
+                render(<FizzBuzz />);
                 checkChangeText([3,5], {3:"LOL", 5:"KEK"});
             });
             test('one should change only one text', () => {
