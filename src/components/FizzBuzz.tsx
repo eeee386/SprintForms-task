@@ -31,7 +31,7 @@ export const FizzBuzz = ({length = 100, numberWordObject = {3: "Fizz", 5: "Buzz"
             if(num % parseInt(elem) === 0){
                 str += numWord[elem];
             }
-        })
+        });
         return str || num.toString();
     }
 
