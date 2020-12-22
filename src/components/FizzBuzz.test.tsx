@@ -13,7 +13,7 @@ function getAllSubArrays<T>(arr: T[], start: number = 0, end: number = 0, resArr
     }
 }
 
-const generateTestsForFizzBuzz = (numArr: number[], numWordObject: {[key: string]: string}, times:number=1):void => {
+const generateTestsForFizzBuzz = (numArr: number[], numWordObject: {[key: string]: string}, times:number=1, id=""):void => {
     const subArrays = getAllSubArrays(numArr);
     subArrays.forEach((subArr) => {
         const prodNum = subArr.reduce((acc, curr) => acc*curr,1);
@@ -25,23 +25,23 @@ const generateTestsForFizzBuzz = (numArr: number[], numWordObject: {[key: string
                 times++;
                 continue;
             }
-            expect(screen.getByTestId(numToCheck.toString()).textContent).toEqual(strToCompare);
+            expect(screen.getByTestId(`${numToCheck}${id}`).textContent).toEqual(strToCompare);
         }
     });
 }
 
-const changeTextWithInput = (number: number, value: string): void => {
-    const input = screen.getByTestId(`${number}Input`);
-    const button = screen.getByTestId(`${number}Button`);
+const changeTextWithInput = (number: number, value: string, id=""): void => {
+    const input = screen.getByTestId(`${number}Input${id}`);
+    const button = screen.getByTestId(`${number}Button${id}`);
     fireEvent.change(input, { target: { value: value } });
     fireEvent.click(button);
 }
 
-const checkChangeText = (numArr: number[], newNumWordObject: {[key:string]: string}): void => {
+const checkChangeText = (numArr: number[], newNumWordObject: {[key:string]: string}, id=""): void => {
     numArr.forEach(number => {
-        changeTextWithInput(number, newNumWordObject[number]);
+        changeTextWithInput(number, newNumWordObject[number], id);
     });
-    generateTestsForFizzBuzz(numArr, newNumWordObject, 3);
+    generateTestsForFizzBuzz(numArr, newNumWordObject, 3, id);
 }
 
 describe("Test FizzBuzz Component", ()=> {
@@ -65,22 +65,26 @@ describe("Test FizzBuzz Component", ()=> {
         });
     });
     describe("Render proped component", () => {
-        const renderPropedComp = () => render(<FizzBuzz id={"id"} numberWordObject={{3: "Foo", 4: "Bar", 7: "Baz"}} length={91} />);
+        const numWordObject = {3: "Foo", 4: "Bar", 7: "Baz"};
+        const numArr = [3,4,7];
+        const id = "id";
+        const renderPropedComp = () => render(<FizzBuzz id={"id"} numberWordObject={numWordObject} length={400} />);
         describe("Check render", () => {
             test("should write the proper strings for the numbers", () => {
-                render(<FizzBuzz id={"id"} />);
-                generateTestsForFizzBuzz([3,5], {3: "Fizz", 5:"Buzz"}, 3);
+                renderPropedComp();
+                generateTestsForFizzBuzz(numArr, numWordObject, 3, id);
             });
         });
         describe("Check interactions", () => {
             test('inputs should change the text', () => {
-                checkChangeText([3,5], {3:"LOL", 5:"KEK"});
+                renderPropedComp();
+                checkChangeText(numArr, {3: "LOL", 4: "KEK", 7: "LMAO"}, id);
             });
             test('one should change only one text', () => {
-                render(<FizzBuzz />);
-                changeTextWithInput(3, "LOL");
-                generateTestsForFizzBuzz([3,5], {3: "LOL", 5:"Buzz"}, 3);
-            })
+                renderPropedComp();
+                changeTextWithInput(3, "LOL", "id");
+                generateTestsForFizzBuzz(numArr, {...numWordObject, 3:"LOL"}, 3, id);
+            });
         });
     })
 
