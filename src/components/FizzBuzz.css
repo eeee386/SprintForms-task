@@ -6,3 +6,7 @@
 .numberWrapper > span {
   margin: 3px 0 0 10px;
 }
+
+.FizzBuzzContentWrapper {
+  width: 50%;
+}

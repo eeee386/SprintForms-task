@@ -1,12 +1,13 @@
 import React from 'react';
 import {FizzBuzz} from "./components/FizzBuzz";
+import './App.css';
 
 function App() {
     return (
-        <>
-            <FizzBuzz/>
-            <FizzBuzz length={91} numberWordObject={new Map().set(4, "Foo").set(7, "Bar").set(3, "Baz")}/>
-        </>
+        <div className={"FizzBuzzWrapper"}>
+            <FizzBuzz id={"FizzBuzz"}/>
+            <FizzBuzz length={91} numberWordObject={{3: "Foo", 4: "Bar", 7: "Baz"}} id={"FooBar"}/>
+        </div>
     );
 }
 
